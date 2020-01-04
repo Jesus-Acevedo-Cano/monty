@@ -4,6 +4,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -35,6 +40,12 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-int main(int argc, char *argv[]);
+int main(int argc, char **argv);
+int op_file(char *fileN);
+void push_int(stack_t **head, unsigned int n);
+int exect(char *cmd, char *arg);
+void (*get_function(char *opcode))(stack_t **stack, unsigned int line_number);
+
+char *globalV;
 
 #endif
