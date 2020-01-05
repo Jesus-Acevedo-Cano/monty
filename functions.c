@@ -39,3 +39,21 @@ void push_int(stack_t **head, unsigned int n)
 	}
 	exit(EXIT_SUCCESS);
 }
+/**
+ *pall_int - print values on stack
+ *@stack: Double pointer
+ *@line_number: Line number
+ */
+
+void pall_int(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp = *stack;
+
+	(void) line_number;
+
+	while (tmp)
+	{
+		printf("%d\n", tmp->n);
+		tmp = tmp->next;
+	}
+}

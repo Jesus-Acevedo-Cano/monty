@@ -37,12 +37,11 @@ int op_file(char *fileN)
 
 int exect(char *cmd, char *arg)
 {
-	/**char *globalV = arg;*/
 	stack_t *head = NULL;
 
-	printf("%s %s", cmd, arg);
-	(get_function(cmd))(&head, 0);
-	printf("%d", head->n);
+	/**printf("%s %s", cmd, arg);*/
+	(get_function(cmd))(&head, atoi(arg));
+	printf("%d\n", head->n);
 
 	return (0);
 }
@@ -58,8 +57,11 @@ void (*get_function(char *opcode))(stack_t **stack, unsigned int line_number)
 	int cnt = 0;
 	instruction_t opcode_fn[] = {
 		{"push", push_int},
+		{"pall", pall_int},
 		{NULL, NULL}
 	};
+	/**if (opcode[0] == '#')
+	   return;*/
 
 	for (cnt = 0; opcode_fn[cnt].opcode != NULL; cnt++)
 	{
