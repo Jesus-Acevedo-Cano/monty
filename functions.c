@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  * push_int - function to add a new node at end
  * @head: Pointer to head of list
@@ -17,7 +18,7 @@ void push_int(stack_t **head, unsigned int n)
 	if (new == NULL)
 		return;
 
-	new->n = atoi(globalV);
+	new->n = n;
 	new->next = NULL;
 	new->prev = NULL;
 
@@ -38,4 +39,3 @@ void push_int(stack_t **head, unsigned int n)
 	}
 	exit(EXIT_SUCCESS);
 }
-/*__________________________________________________*/

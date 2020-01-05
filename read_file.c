@@ -37,12 +37,14 @@ int op_file(char *fileN)
 
 int exect(char *cmd, char *arg)
 {
-	char *globalV = arg;
+	/**char *globalV = arg;*/
 	stack_t *head = NULL;
 
 	printf("%s %s", cmd, arg);
 	(get_function(cmd))(&head, 0);
 	printf("%d", head->n);
+
+	return (0);
 }
 
 /**
