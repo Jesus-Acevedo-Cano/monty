@@ -45,6 +45,7 @@ int op_file(char *fileN);
 void push_int(stack_t **head, unsigned int n);
 int exect(char *cmd, char *arg);
 void (*get_function(char *opcode))(stack_t **stack, unsigned int line_number);
+void free_n(void);
 
 char *globalV;
 

@@ -1,5 +1,11 @@
 #include "monty.h"
 
+/**
+ * op_file - Function to open file
+ * @fileN: Name of file
+ * Return: Always 0
+ */
+
 int op_file(char *fileN)
 {
 	FILE *fp = NULL;
@@ -22,6 +28,13 @@ int op_file(char *fileN)
 	exit(EXIT_SUCCESS);
 }
 
+/**
+ * exect - function to exect commands
+ * @cmd: command argument
+ * @arg: arguments
+ * Return: Always 0
+ */
+
 int exect(char *cmd, char *arg)
 {
 	char *globalV = arg;
@@ -31,6 +44,13 @@ int exect(char *cmd, char *arg)
 	(get_function(cmd))(&head, 0);
 	printf("%d", head->n);
 }
+
+/**
+ * get_function - Short desc
+ * @opcode: opcode
+ * Return: void
+ */
+
 void (*get_function(char *opcode))(stack_t **stack, unsigned int line_number)
 {
 	int cnt = 0;

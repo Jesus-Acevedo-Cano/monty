@@ -36,6 +36,6 @@ void push_int(stack_t **head, unsigned int n)
 		}
 		tmp = tmp->next;
 	}
-	return;
+	exit(EXIT_SUCCESS);
 }
 /*__________________________________________________*/
