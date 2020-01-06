@@ -15,7 +15,7 @@ int op_file(char *fileN)
 	globalVar.fp = fopen(fileN, "r");
 	if (globalVar.fp == NULL)
 	{
-		dprintf(STDERR_FILENO, "imp error cant open file");
+		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", fileN);
 		exit(EXIT_FAILURE);
 	}
 	while ((read = getline(&(globalVar.line), &len, globalVar.fp)) != -1)
