@@ -61,6 +61,7 @@ void (*get_function(char *opcode))(stack_t **stack, unsigned int line_number)
 	instruction_t opcode_fn[] = {
 		{"pall", pall_int},
 		{"push", push_int},
+		{"pint", pint_int},
 		{NULL, NULL}
 	};
 

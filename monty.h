@@ -49,6 +49,7 @@ void (*get_function(char *opcode))(stack_t **stack, unsigned int line_number);
 void free_n(void);
 void pall_int(stack_t **stack, unsigned int line_number);
 void freeAll(void);
+void pint_int(stack_t **stack, unsigned int line_number);
 
 /**
  * struct global_v - global variable
