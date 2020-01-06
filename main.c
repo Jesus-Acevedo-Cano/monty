@@ -57,3 +57,17 @@ void freeAll(void)
 		free(globalVar.line);
 	free_n();
 }
+
+/**
+ * nop_int - do nothing
+ * @stack: stack
+ * @line_number: line number
+ *
+ * Return: nothing
+ */
+
+void nop_int(stack_t **stack, unsigned int line_number)
+{
+	(void) stack;
+	(void) line_number;
+}
