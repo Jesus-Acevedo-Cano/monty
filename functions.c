@@ -37,8 +37,8 @@ void push_int(stack_t **head, unsigned int n)
 		}
 		tmp = tmp->next;
 	}
-	exit(EXIT_SUCCESS);
 }
+
 /**
  *pall_int - print values on stack
  *@stack: Double pointer
@@ -50,7 +50,7 @@ void pall_int(stack_t **stack, unsigned int line_number)
 	stack_t *tmp = *stack;
 
 	(void) line_number;
-
+	printf("pall fn");
 	while (tmp)
 	{
 		printf("%d\n", tmp->n);

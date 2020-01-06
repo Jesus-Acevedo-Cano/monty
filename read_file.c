@@ -15,12 +15,14 @@ int op_file(char *fileN)
 
 	fp = fopen(fileN, "r");
 	if (fp == NULL)
+	{
+		/**dprintf("imp error cant open file");*/
 		exit(EXIT_FAILURE);
-
+	}
 	while ((read = getline(&line, &len, fp)) != -1)
 	{
-		tokcmd = strtok(line, " ");
-		tokarg = strtok(NULL, " ");
+		tokcmd = strtok(line, "\n\t ");
+		tokarg = strtok(NULL, "\n\t ");
 		exect(tokcmd, tokarg);
 	}
 
@@ -38,9 +40,10 @@ int op_file(char *fileN)
 int exect(char *cmd, char *arg)
 {
 	stack_t *head = NULL;
-
-	/**printf("%s %s", cmd, arg);*/
-	(get_function(cmd))(&head, atoi(arg));
+	if (arg != NULL)
+		(get_function(cmd))(&head, atoi(arg));
+	else
+		(get_function(cmd))(&head, 0);
 	printf("%d\n", head->n);
 
 	return (0);
@@ -56,8 +59,8 @@ void (*get_function(char *opcode))(stack_t **stack, unsigned int line_number)
 {
 	int cnt = 0;
 	instruction_t opcode_fn[] = {
-		{"push", push_int},
 		{"pall", pall_int},
+		{"push", push_int},
 		{NULL, NULL}
 	};
 	/**if (opcode[0] == '#')
@@ -66,7 +69,13 @@ void (*get_function(char *opcode))(stack_t **stack, unsigned int line_number)
 	for (cnt = 0; opcode_fn[cnt].opcode != NULL; cnt++)
 	{
 		if (strcmp(opcode, opcode_fn[cnt].opcode) == 0)
+			printf("%s\n", opcode);
+		if (strcmp(opcode, opcode_fn[cnt].opcode) == 0)
+		{
+			printf("loq");
 			return (opcode_fn[cnt].f);
+		}
 	}
+	printf("whatever");
 	return (NULL);
 }
