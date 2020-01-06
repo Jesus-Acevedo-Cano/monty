@@ -1,5 +1,5 @@
 #include "monty.h"
-stack_t *head = NULL;
+global globalVar = {NULL, NULL, NULL, 0};
 
 /**
  * main - Main function
@@ -30,13 +30,27 @@ void free_n(void)
 {
 	stack_t *tmp;
 
-	if (head == NULL)
+	if (globalVar.head == NULL)
 		return;
 
-	while (head != NULL)
+	while (globalVar.head != NULL)
 	{
-		tmp = head;
-		head = head->next;
+		tmp = globalVar.head;
+		globalVar.head = globalVar.head->next;
 		free(tmp);
 	}
+}
+
+/**
+ *
+ *
+ */
+
+void freeAll(void)
+{
+	if (globalVar.fp != NULL)
+		fclose(globalVar.fp);
+	if (globalVar.line != NULL)
+		free(globalVar.line);
+	free_n();
 }

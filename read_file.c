@@ -8,25 +8,24 @@
 
 int op_file(char *fileN)
 {
-	FILE *fp = NULL;
-	char *line = NULL, *tokcmd, *tokarg;
+	char *tokcmd, *tokarg;
 	size_t len = 0;
 	ssize_t read;
 
-	fp = fopen(fileN, "r");
-	if (fp == NULL)
+	globalVar.fp = fopen(fileN, "r");
+	if (globalVar.fp == NULL)
 	{
-		/**dprintf("imp error cant open file");*/
+		dprintf(STDERR_FILENO, "imp error cant open file");
 		exit(EXIT_FAILURE);
 	}
-	while ((read = getline(&line, &len, fp)) != -1)
+	while ((read = getline(&(globalVar.line), &len, globalVar.fp)) != -1)
 	{
-		tokcmd = strtok(line, "\n\t ");
+		globalVar.line_number++;
+		tokcmd = strtok(globalVar.line, "\n\t ");
 		tokarg = strtok(NULL, "\n\t ");
-		exect(tokcmd, tokarg);
+		exect(tokcmd, tokarg, &(globalVar.head));
 	}
-
-	free(line);
+	freeAll();
 	exit(EXIT_SUCCESS);
 }
 
@@ -37,14 +36,12 @@ int op_file(char *fileN)
  * Return: Always 0
  */
 
-int exect(char *cmd, char *arg)
+int exect(char *cmd, char *arg, stack_t **head)
 {
-	stack_t *head = NULL;
 	if (arg != NULL)
-		(get_function(cmd))(&head, atoi(arg));
+		(get_function(cmd))(head, atoi(arg));
 	else
-		(get_function(cmd))(&head, 0);
-	printf("%d\n", head->n);
+		(get_function(cmd))(head, 0);
 
 	return (0);
 }
@@ -57,6 +54,7 @@ int exect(char *cmd, char *arg)
 
 void (*get_function(char *opcode))(stack_t **stack, unsigned int line_number)
 {
+	char *msg = ": unknown instruction ";
 	int cnt = 0;
 	instruction_t opcode_fn[] = {
 		{"pall", pall_int},
@@ -68,14 +66,14 @@ void (*get_function(char *opcode))(stack_t **stack, unsigned int line_number)
 
 	for (cnt = 0; opcode_fn[cnt].opcode != NULL; cnt++)
 	{
-		if (strcmp(opcode, opcode_fn[cnt].opcode) == 0)
-			printf("%s\n", opcode);
+		if (!opcode)
+			return NULL;
 		if (strcmp(opcode, opcode_fn[cnt].opcode) == 0)
 		{
-			printf("loq");
 			return (opcode_fn[cnt].f);
 		}
 	}
-	printf("whatever");
-	return (NULL);
+	dprintf(STDERR_FILENO, "L%u%s%s\n", globalVar.line_number, msg, opcode);
+	freeAll();
+	exit(EXIT_FAILURE);
 }

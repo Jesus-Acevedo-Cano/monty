@@ -43,11 +43,19 @@ typedef struct instruction_s
 int main(int argc, char **argv);
 int op_file(char *fileN);
 void push_int(stack_t **head, unsigned int n);
-int exect(char *cmd, char *arg);
+int exect(char *cmd, char *arg, stack_t **head);
 void (*get_function(char *opcode))(stack_t **stack, unsigned int line_number);
 void free_n(void);
 void pall_int(stack_t **stack, unsigned int line_number);
+void freeAll(void);
 
-extern stack_t *head;
+typedef struct global_v
+{
+	stack_t *head;
+	FILE *fp;
+	char *line;
+	unsigned int line_number;
+} global;
+extern global globalVar;
 
 #endif

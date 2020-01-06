@@ -9,10 +9,7 @@
 
 void push_int(stack_t **head, unsigned int n)
 {
-	stack_t *new, *tmp = *head;
-
-	if (head == NULL)
-		return;
+	stack_t *new = *head;
 
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
@@ -27,16 +24,9 @@ void push_int(stack_t **head, unsigned int n)
 		*head = new;
 		return;
 	}
-	while (tmp != NULL)
-	{
-		if (tmp->next == NULL)
-		{
-			tmp->next = new;
-			new->prev = tmp;
-			return;
-		}
-		tmp = tmp->next;
-	}
+	new->next = *head;
+	(*head)->prev = new;
+	*head = new;
 }
 
 /**
@@ -50,7 +40,7 @@ void pall_int(stack_t **stack, unsigned int line_number)
 	stack_t *tmp = *stack;
 
 	(void) line_number;
-	printf("pall fn");
+
 	while (tmp)
 	{
 		printf("%d\n", tmp->n);
