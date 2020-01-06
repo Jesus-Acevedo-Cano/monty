@@ -12,6 +12,7 @@ void push_int(stack_t **head, unsigned int n)
 	stack_t *new = *head;
 	char *msg = ": usage: push integer\n";
 	int i = 0;
+	(void) n;
 
 	if (globalVar.nValue == NULL)
 	{
@@ -37,8 +38,7 @@ void push_int(stack_t **head, unsigned int n)
 		freeAll();
 		exit(EXIT_FAILURE);
 	}
-
-	new->n = n;
+	new->n = atoi(globalVar.nValue);
 	new->next = NULL;
 	new->prev = NULL;
 	if (*head == NULL)

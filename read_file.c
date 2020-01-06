@@ -22,8 +22,11 @@ int op_file(char *fileN)
 	{
 		globalVar.line_number++;
 		tokcmd = strtok(globalVar.line, "\n\t ");
-		globalVar.nValue = strtok(NULL, "\n\t ");
-		exect(tokcmd, globalVar.nValue, &(globalVar.head));
+		if (tokcmd != NULL && tokcmd[0] != '#')
+		{
+			globalVar.nValue = strtok(NULL, "\n\t ");
+			exect(tokcmd, globalVar.nValue, &(globalVar.head));
+		}
 	}
 	freeAll();
 	exit(EXIT_SUCCESS);
@@ -39,10 +42,8 @@ int op_file(char *fileN)
 
 int exect(char *cmd, char *arg, stack_t **head)
 {
-	if (arg != NULL)
-		(get_function(cmd))(head, atoi(arg));
-	else
-		(get_function(cmd))(head, 0);
+	(void) arg;
+	(get_function(cmd))(head, globalVar.line_number);
 
 	return (0);
 }
