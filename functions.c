@@ -10,10 +10,29 @@
 void push_int(stack_t **head, unsigned int n)
 {
 	stack_t *new = *head;
+	char *msg = ": usage: push integer\n";
+	int i = 0;
 
+	if (globalVar.nValue != NULL && globalVar.nValue[0] == '-')
+		i = 1;
+
+	for (; globalVar.nValue[i] != '\0'; i++)
+	{
+		if (isdigit(globalVar.nValue[i]) == 0)
+		{
+			dprintf(STDERR_FILENO, "L%u%s", globalVar.line_number, msg);
+			freeAll();
+			exit(EXIT_FAILURE);
+		}
+	}
 	new = malloc(sizeof(stack_t));
+
 	if (new == NULL)
-		return;
+	{
+		dprintf(STDERR_FILENO, "Error: malloc failed\n");
+		freeAll();
+		exit(EXIT_FAILURE);
+	}
 
 	new->n = n;
 	new->next = NULL;

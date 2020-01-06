@@ -1,5 +1,5 @@
 #include "monty.h"
-global globalVar = {NULL, NULL, NULL, 0};
+global globalVar = {NULL, NULL, NULL, 0, NULL};
 
 /**
  * main - Main function
@@ -42,7 +42,7 @@ void free_n(void)
 }
 
 /**
- *
+ * freeAll - free all
  *
  */
 

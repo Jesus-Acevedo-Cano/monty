@@ -8,7 +8,7 @@
 
 int op_file(char *fileN)
 {
-	char *tokcmd, *tokarg;
+	char *tokcmd;
 	size_t len = 0;
 	ssize_t read;
 
@@ -22,8 +22,8 @@ int op_file(char *fileN)
 	{
 		globalVar.line_number++;
 		tokcmd = strtok(globalVar.line, "\n\t ");
-		tokarg = strtok(NULL, "\n\t ");
-		exect(tokcmd, tokarg, &(globalVar.head));
+		globalVar.nValue = strtok(NULL, "\n\t ");
+		exect(tokcmd, globalVar.nValue, &(globalVar.head));
 	}
 	freeAll();
 	exit(EXIT_SUCCESS);
@@ -33,6 +33,7 @@ int op_file(char *fileN)
  * exect - function to exect commands
  * @cmd: command argument
  * @arg: arguments
+ * @head: head
  * Return: Always 0
  */
 
@@ -61,13 +62,11 @@ void (*get_function(char *opcode))(stack_t **stack, unsigned int line_number)
 		{"push", push_int},
 		{NULL, NULL}
 	};
-	/**if (opcode[0] == '#')
-	   return;*/
 
 	for (cnt = 0; opcode_fn[cnt].opcode != NULL; cnt++)
 	{
 		if (!opcode)
-			return NULL;
+			return (NULL);
 		if (strcmp(opcode, opcode_fn[cnt].opcode) == 0)
 		{
 			return (opcode_fn[cnt].f);
