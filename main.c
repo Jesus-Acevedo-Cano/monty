@@ -15,10 +15,13 @@ int main(int argc, char **argv)
 	if (argc == 2)
 	{
 		op_file(fileN);
-		free_n();
+		freeAll();
 	}
 	else
+	{
 		dprintf(STDERR_FILENO, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
 	return (0);
 }
 
