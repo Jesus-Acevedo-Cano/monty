@@ -67,6 +67,7 @@ void (*get_function(char *opcode))(stack_t **stack, unsigned int line_number)
 		{"swap", swap_int},
 		{"add", add_int},
 		{"sub", sub_int},
+		{"div", div_int},
 		{NULL, NULL}
 	};
 
@@ -115,17 +116,17 @@ void add_int(stack_t **stack, unsigned int line_number)
 
 void sub_int(stack_t **stack, unsigned int line_number)
 {
-        stack_t *new;
+	stack_t *new;
 
-        if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
-        {
-                dprintf(STDERR_FILENO, "L%d: can't sub, stack too short\n", line_number);
-                freeAll();
-                exit(EXIT_FAILURE);
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
+	{
+		dprintf(STDERR_FILENO, "L%d: can't sub, stack too short\n", line_number);
+		freeAll();
+		exit(EXIT_FAILURE);
 	}
-        new = (*stack)->next;
-        (*stack)->next->n -= (*stack)->n;
-        free(*stack);
-        new->prev = NULL;
-        (*stack) = new;
+	new = (*stack)->next;
+	(*stack)->next->n -= (*stack)->n;
+	free(*stack);
+	new->prev = NULL;
+	(*stack) = new;
 }

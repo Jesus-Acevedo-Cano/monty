@@ -55,6 +55,8 @@ void pop_int(stack_t **stack, unsigned int line_number);
 void swap_int(stack_t **stack, unsigned int line_number);
 void add_int(stack_t **stack, unsigned int line_number);
 void sub_int(stack_t **stack, unsigned int line_number);
+void div_int(stack_t **stack, unsigned int line_number);
+
 
 /**
  * struct global_v - global variable
