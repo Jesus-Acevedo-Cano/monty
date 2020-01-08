@@ -64,6 +64,7 @@ void (*get_function(char *opcode))(stack_t **stack, unsigned int line_number)
 		{"pint", pint_int},
 		{"nop", nop_int},
 		{"pop", pop_int},
+		{"swap", swap_int},
 		{NULL, NULL}
 	};
 

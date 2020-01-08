@@ -59,14 +59,14 @@ void push_int(stack_t **head, unsigned int n)
 
 void pall_int(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp = *stack;
+	stack_t *new = *stack;
 
 	(void) line_number;
 
-	while (tmp)
+	while (new)
 	{
-		printf("%d\n", tmp->n);
-		tmp = tmp->next;
+		printf("%d\n", new->n);
+		new = new->next;
 	}
 }
 
@@ -89,7 +89,7 @@ void pint_int(stack_t **stack, unsigned int line_number)
 	printf("%d\n", (*stack)->n);
 }
 
-#include "monty.h"
+
 /**
  * pop_int - remove top element
  * @stack: double pointer to head
@@ -97,20 +97,48 @@ void pint_int(stack_t **stack, unsigned int line_number)
  *
  * Return: nothing
  */
+
 void pop_int(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp = *stack;
+	stack_t *new = *stack;
 	char *msg = "can't pop an empty stack\n";
 
 	if (*stack == NULL)
 	{
 		dprintf(STDERR_FILENO, "L%u: %s", line_number, msg);
 		freeAll();
-                exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 
-	tmp = tmp->next;
+	new = new->next;
 	free(*stack);
-	*stack = tmp;
+	*stack = new;
+
+}
+
+/**
+ * swap_int - swaps the two top elements
+ * @stack: double pointer to head
+ * @line_number: line number
+ *
+ * Return: void
+ */
+
+void swap_int(stack_t **stack, unsigned int line_number)
+{
+	stack_t *new = *stack;
+	int val;
+
+	if (new == NULL || new->next == NULL)
+	{
+		dprintf(STDERR_FILENO, "L%d: can't swap, stack too short\n", line_number);
+		freeAll();
+		exit(EXIT_FAILURE);
+	}
+
+	new = new->next;
+	val = new->n;
+	new->n = (*stack)->n;
+	(*stack)->n = val;
 
 }
