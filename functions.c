@@ -70,6 +70,12 @@ void pall_int(stack_t **stack, unsigned int line_number)
 	}
 }
 
+/**
+ *pint_int - print top value
+ *@stack: Double pointer
+ *@line_number: Line number
+ */
+
 void pint_int(stack_t **stack, unsigned int line_number)
 {
 	char *msg = "can't pint, stack empty\n";
@@ -81,4 +87,30 @@ void pint_int(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", (*stack)->n);
+}
+
+#include "monty.h"
+/**
+ * pop_int - remove top element
+ * @stack: double pointer to head
+ * @line_number: line number
+ *
+ * Return: nothing
+ */
+void pop_int(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp = *stack;
+	char *msg = "can't pop an empty stack\n";
+
+	if (*stack == NULL)
+	{
+		dprintf(STDERR_FILENO, "L%u: %s", line_number, msg);
+		freeAll();
+                exit(EXIT_FAILURE);
+	}
+
+	tmp = tmp->next;
+	free(*stack);
+	*stack = tmp;
+
 }

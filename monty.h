@@ -51,6 +51,8 @@ void pall_int(stack_t **stack, unsigned int line_number);
 void freeAll(void);
 void pint_int(stack_t **stack, unsigned int line_number);
 void nop_int(stack_t **stack, unsigned int line_number);
+void pop_int(stack_t **stack, unsigned int line_number);
+
 
 /**
  * struct global_v - global variable
